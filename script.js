@@ -1,5 +1,6 @@
 /**
  * GUIA DA CATEQUESE - Sistema Completo
+ * CORREÇÃO TOTAL DOS BOTÕES DE SALVAR
  */
 
 // Configuração do Firebase
@@ -14,7 +15,9 @@ const firebaseConfig = {
 };
 
 // Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 const db = firebase.firestore();
 
 // Variáveis globais
@@ -24,7 +27,9 @@ let catequizandosData = [];
 // ==========================================
 // INICIALIZAÇÃO
 // ==========================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Sistema iniciado - DOM carregado');
+    
     setupNavigation();
     setupForms();
     setupSearchAndFilters();
@@ -36,23 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
 // NAVEGAÇÃO
 // ==========================================
 function setupNavigation() {
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const section = item.dataset.section;
+    var navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            var section = this.getAttribute('data-section');
             navigateTo(section);
         });
     });
 }
 
 function navigateTo(section) {
-    document.querySelectorAll('.nav-item').forEach(item => {
+    // Atualizar navegação
+    var navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(function(item) {
         item.classList.remove('active');
-        if(item.dataset.section === section) {
+        if(item.getAttribute('data-section') === section) {
             item.classList.add('active');
         }
     });
     
-    document.querySelectorAll('.content-section').forEach(sec => {
+    // Mostrar seção
+    var sections = document.querySelectorAll('.content-section');
+    sections.forEach(function(sec) {
         sec.classList.remove('active');
     });
     document.getElementById(section).classList.add('active');
@@ -63,85 +73,135 @@ function navigateTo(section) {
 window.navigateTo = navigateTo;
 
 // ==========================================
-// SETUP DOS FORMULÁRIOS
+// SETUP DOS FORMULÁRIOS - CORREÇÃO PRINCIPAL
 // ==========================================
 function setupForms() {
+    console.log('Configurando formulários...');
+    
     // Início da Fé
-    document.getElementById('formInicioFe').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await saveInicioFe();
-    });
+    var formInicioFe = document.getElementById('formInicioFe');
+    if(formInicioFe) {
+        formInicioFe.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Salvando Início da Fé...');
+            saveInicioFe();
+        });
+    }
     
     // Evangelho
-    document.getElementById('formEvangelho').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await saveEvangelho();
-    });
+    var formEvangelho = document.getElementById('formEvangelho');
+    if(formEvangelho) {
+        formEvangelho.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Salvando Evangelho...');
+            saveEvangelho();
+        });
+    }
     
     // Oração
-    document.getElementById('formOração').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await saveOração();
-    });
+    var formOração = document.getElementById('formOração');
+    if(formOração) {
+        formOração.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Salvando Oração...');
+            saveOração();
+        });
+    }
     
     // Sacramentos
-    document.getElementById('formSacramentos').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await saveSacramentos();
-    });
+    var formSacramentos = document.getElementById('formSacramentos');
+    if(formSacramentos) {
+        formSacramentos.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Salvando Sacramentos...');
+            saveSacramentos();
+        });
+    }
     
     // Missão
-    document.getElementById('formMissao').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await saveMissao();
-    });
+    var formMissao = document.getElementById('formMissao');
+    if(formMissao) {
+        formMissao.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Salvando Missão...');
+            saveMissao();
+        });
+    }
     
     // Catequizandos
-    document.getElementById('formCatequizandos').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await saveCatequizando();
-    });
+    var formCatequizandos = document.getElementById('formCatequizandos');
+    if(formCatequizandos) {
+        formCatequizandos.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Salvando Catequizando...');
+            saveCatequizando();
+        });
+    }
+    
+    console.log('Formulários configurados com sucesso!');
 }
 
 function setupSearchAndFilters() {
-    document.getElementById('searchCatequizando').addEventListener('input', filterCatequizandos);
-    document.getElementById('filterTurma').addEventListener('change', filterCatequizandos);
+    var searchInput = document.getElementById('searchCatequizando');
+    var filterSelect = document.getElementById('filterTurma');
+    
+    if(searchInput) {
+        searchInput.addEventListener('input', filterCatequizandos);
+    }
+    if(filterSelect) {
+        filterSelect.addEventListener('change', filterCatequizandos);
+    }
 }
 
 // ==========================================
-// INÍCIO DA FÉ
+// INÍCIO DA FÉ - SALVAR
 // ==========================================
-async function saveInicioFe() {
-    const id = document.getElementById('feId').value;
-    const data = {
-        data: document.getElementById('feData').value,
+function saveInicioFe() {
+    var id = document.getElementById('feId').value;
+    var data = {
+         document.getElementById('feData').value,
         tema: document.getElementById('feTema').value,
         objetivo: document.getElementById('feObjetivo').value,
         texto: document.getElementById('feTexto').value
     };
     
-    try {
-        if(id) {
-            await db.collection('inicioFe').doc(id).update(data);
-            showMessage('Registro atualizado!');
-        } else {
-            await db.collection('inicioFe').add(data);
-            showMessage('Registro salvo!');
-        }
-        resetForm('fe');
-        loadInicioFe();
-    } catch(error) {
-        console.error('Erro:', error);
-        showMessage('Erro ao salvar', 'error');
+    console.log('Dados para salvar:', data);
+    
+    if(id) {
+        // Atualizar
+        db.collection('inicioFe').doc(id).update(data)
+            .then(function() {
+                console.log('Registro atualizado com sucesso!');
+                showMessage('Registro atualizado com sucesso!');
+                resetForm('fe');
+                loadInicioFe();
+            })
+            .catch(function(error) {
+                console.error('Erro ao atualizar:', error);
+                showMessage('Erro ao atualizar: ' + error.message, 'error');
+            });
+    } else {
+        // Criar novo
+        db.collection('inicioFe').add(data)
+            .then(function(docRef) {
+                console.log('Registro criado com ID:', docRef.id);
+                showMessage('Registro salvo com sucesso!');
+                resetForm('fe');
+                loadInicioFe();
+            })
+            .catch(function(error) {
+                console.error('Erro ao salvar:', error);
+                showMessage('Erro ao salvar: ' + error.message, 'error');
+            });
     }
 }
 
 async function loadInicioFe() {
-    const container = document.getElementById('listaInicioFe');
+    var container = document.getElementById('listaInicioFe');
     container.innerHTML = '<div class="loading">Carregando...</div>';
     
     try {
-        const snapshot = await db.collection('inicioFe').orderBy('data', 'desc').get();
+        var snapshot = await db.collection('inicioFe').orderBy('data', 'desc').get();
         
         if(snapshot.empty) {
             container.innerHTML = '<div class="empty-state">Nenhum registro</div>';
@@ -149,12 +209,13 @@ async function loadInicioFe() {
         }
         
         container.innerHTML = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
+        snapshot.forEach(function(doc) {
+            var data = doc.data();
             container.innerHTML += createInicioFeCard(doc.id, data);
             listenComments('inicioFe', doc.id);
         });
     } catch(error) {
+        console.error('Erro ao carregar:', error);
         container.innerHTML = '<div class="empty-state">Erro ao carregar</div>';
     }
 }
@@ -195,8 +256,8 @@ function createInicioFeCard(id, data) {
 }
 
 async function editInicioFe(id) {
-    const doc = await db.collection('inicioFe').doc(id).get();
-    const data = doc.data();
+    var doc = await db.collection('inicioFe').doc(id).get();
+    var data = doc.data();
     
     document.getElementById('feId').value = id;
     document.getElementById('feData').value = data.data;
@@ -210,38 +271,50 @@ async function editInicioFe(id) {
 }
 
 // ==========================================
-// EVANGELHO
+// EVANGELHO - SALVAR
 // ==========================================
-async function saveEvangelho() {
-    const id = document.getElementById('evId').value;
-    const data = {
-        data: document.getElementById('evData').value,
+function saveEvangelho() {
+    var id = document.getElementById('evId').value;
+    var data = {
+         document.getElementById('evData').value,
         referencia: document.getElementById('evReferencia').value,
         frase: document.getElementById('evFrase').value,
         texto: document.getElementById('evTexto').value
     };
     
-    try {
-        if(id) {
-            await db.collection('evangelho').doc(id).update(data);
-            showMessage('Atualizado!');
-        } else {
-            await db.collection('evangelho').add(data);
-            showMessage('Salvo!');
-        }
-        resetForm('ev');
-        loadEvangelho();
-    } catch(error) {
-        showMessage('Erro', 'error');
+    console.log('Dados Evangelho:', data);
+    
+    if(id) {
+        db.collection('evangelho').doc(id).update(data)
+            .then(function() {
+                showMessage('Evangelho atualizado!');
+                resetForm('ev');
+                loadEvangelho();
+            })
+            .catch(function(error) {
+                console.error('Erro:', error);
+                showMessage('Erro: ' + error.message, 'error');
+            });
+    } else {
+        db.collection('evangelho').add(data)
+            .then(function() {
+                showMessage('Evangelho salvo!');
+                resetForm('ev');
+                loadEvangelho();
+            })
+            .catch(function(error) {
+                console.error('Erro:', error);
+                showMessage('Erro: ' + error.message, 'error');
+            });
     }
 }
 
 async function loadEvangelho() {
-    const container = document.getElementById('listaEvangelho');
+    var container = document.getElementById('listaEvangelho');
     container.innerHTML = '<div class="loading">Carregando...</div>';
     
     try {
-        const snapshot = await db.collection('evangelho').orderBy('data', 'desc').get();
+        var snapshot = await db.collection('evangelho').orderBy('data', 'desc').get();
         
         if(snapshot.empty) {
             container.innerHTML = '<div class="empty-state">Nenhum registro</div>';
@@ -249,7 +322,7 @@ async function loadEvangelho() {
         }
         
         container.innerHTML = '';
-        snapshot.forEach(doc => {
+        snapshot.forEach(function(doc) {
             container.innerHTML += createEvangelhoCard(doc.id, doc.data());
             listenComments('evangelho', doc.id);
         });
@@ -294,8 +367,8 @@ function createEvangelhoCard(id, data) {
 }
 
 async function editEvangelho(id) {
-    const doc = await db.collection('evangelho').doc(id).get();
-    const data = doc.data();
+    var doc = await db.collection('evangelho').doc(id).get();
+    var data = doc.data();
     
     document.getElementById('evId').value = id;
     document.getElementById('evData').value = data.data;
@@ -308,37 +381,46 @@ async function editEvangelho(id) {
 }
 
 // ==========================================
-// ORAÇÃO
+// ORAÇÃO - SALVAR
 // ==========================================
-async function saveOração() {
-    const id = document.getElementById('orId').value;
-    const data = {
-        data: document.getElementById('orData').value,
+function saveOração() {
+    var id = document.getElementById('orId').value;
+    var data = {
+         document.getElementById('orData').value,
         tipo: document.getElementById('orTipo').value,
         causa: document.getElementById('orCausa').value,
         detalhes: document.getElementById('orDetalhes').value
     };
     
-    try {
-        if(id) {
-            await db.collection('oracao').doc(id).update(data);
-        } else {
-            await db.collection('oracao').add(data);
-        }
-        resetForm('or');
-        loadOração();
-        showMessage('Salvo!');
-    } catch(error) {
-        showMessage('Erro', 'error');
+    if(id) {
+        db.collection('oracao').doc(id).update(data)
+            .then(function() {
+                showMessage('Oração atualizada!');
+                resetForm('or');
+                loadOração();
+            })
+            .catch(function(error) {
+                showMessage('Erro: ' + error.message, 'error');
+            });
+    } else {
+        db.collection('oracao').add(data)
+            .then(function() {
+                showMessage('Oração salva!');
+                resetForm('or');
+                loadOração();
+            })
+            .catch(function(error) {
+                showMessage('Erro: ' + error.message, 'error');
+            });
     }
 }
 
 async function loadOração() {
-    const container = document.getElementById('listaOração');
+    var container = document.getElementById('listaOração');
     container.innerHTML = '<div class="loading">Carregando...</div>';
     
     try {
-        const snapshot = await db.collection('oracao').orderBy('data', 'desc').get();
+        var snapshot = await db.collection('oracao').orderBy('data', 'desc').get();
         
         if(snapshot.empty) {
             container.innerHTML = '<div class="empty-state">Nenhum registro</div>';
@@ -346,7 +428,7 @@ async function loadOração() {
         }
         
         container.innerHTML = '';
-        snapshot.forEach(doc => {
+        snapshot.forEach(function(doc) {
             container.innerHTML += createOraçãoCard(doc.id, doc.data());
         });
     } catch(error) {
@@ -355,7 +437,7 @@ async function loadOração() {
 }
 
 function createOraçãoCard(id, data) {
-    const badgeClass = `badge-${data.tipo.toLowerCase()}`;
+    var badgeClass = 'badge-' + data.tipo.toLowerCase();
     return `
         <div class="record-card">
             <div class="record-header" onclick="toggleRecord('${id}')">
@@ -383,8 +465,8 @@ function createOraçãoCard(id, data) {
 }
 
 async function editOração(id) {
-    const doc = await db.collection('oracao').doc(id).get();
-    const data = doc.data();
+    var doc = await db.collection('oracao').doc(id).get();
+    var data = doc.data();
     
     document.getElementById('orId').value = id;
     document.getElementById('orData').value = data.data;
@@ -397,37 +479,46 @@ async function editOração(id) {
 }
 
 // ==========================================
-// SACRAMENTOS
+// SACRAMENTOS - SALVAR
 // ==========================================
-async function saveSacramentos() {
-    const id = document.getElementById('saId').value;
-    const data = {
-        data: document.getElementById('saData').value,
+function saveSacramentos() {
+    var id = document.getElementById('saId').value;
+    var data = {
+         document.getElementById('saData').value,
         sacramento: document.getElementById('saSacramento').value,
         compromisso: document.getElementById('saCompromisso').value,
         reflexao: document.getElementById('saReflexao').value
     };
     
-    try {
-        if(id) {
-            await db.collection('sacramentos').doc(id).update(data);
-        } else {
-            await db.collection('sacramentos').add(data);
-        }
-        resetForm('sa');
-        loadSacramentos();
-        showMessage('Salvo!');
-    } catch(error) {
-        showMessage('Erro', 'error');
+    if(id) {
+        db.collection('sacramentos').doc(id).update(data)
+            .then(function() {
+                showMessage('Sacramento atualizado!');
+                resetForm('sa');
+                loadSacramentos();
+            })
+            .catch(function(error) {
+                showMessage('Erro: ' + error.message, 'error');
+            });
+    } else {
+        db.collection('sacramentos').add(data)
+            .then(function() {
+                showMessage('Sacramento salvo!');
+                resetForm('sa');
+                loadSacramentos();
+            })
+            .catch(function(error) {
+                showMessage('Erro: ' + error.message, 'error');
+            });
     }
 }
 
 async function loadSacramentos() {
-    const container = document.getElementById('listaSacramentos');
+    var container = document.getElementById('listaSacramentos');
     container.innerHTML = '<div class="loading">Carregando...</div>';
     
     try {
-        const snapshot = await db.collection('sacramentos').orderBy('data', 'desc').get();
+        var snapshot = await db.collection('sacramentos').orderBy('data', 'desc').get();
         
         if(snapshot.empty) {
             container.innerHTML = '<div class="empty-state">Nenhum registro</div>';
@@ -435,7 +526,7 @@ async function loadSacramentos() {
         }
         
         container.innerHTML = '';
-        snapshot.forEach(doc => {
+        snapshot.forEach(function(doc) {
             container.innerHTML += createSacramentosCard(doc.id, doc.data());
         });
     } catch(error) {
@@ -472,8 +563,8 @@ function createSacramentosCard(id, data) {
 }
 
 async function editSacramentos(id) {
-    const doc = await db.collection('sacramentos').doc(id).get();
-    const data = doc.data();
+    var doc = await db.collection('sacramentos').doc(id).get();
+    var data = doc.data();
     
     document.getElementById('saId').value = id;
     document.getElementById('saData').value = data.data;
@@ -486,36 +577,51 @@ async function editSacramentos(id) {
 }
 
 // ==========================================
-// MISSÃO
+// MISSÃO - SALVAR
 // ==========================================
-async function saveMissao() {
-    const id = document.getElementById('miId').value;
-    const data = {
-        data: document.getElementById('miData').value,
+function saveMissao() {
+    var id = document.getElementById('miId').value;
+    var data = {
+         document.getElementById('miData').value,
         pergunta: document.getElementById('miPergunta').value,
         objetivo: document.getElementById('miObjetivo').value
     };
     
-    try {
-        if(id) {
-            await db.collection('missao').doc(id).update(data);
-        } else {
-            await db.collection('missao').add(data);
-        }
-        resetForm('mi');
-        loadMissao();
-        showMessage('Salvo!');
-    } catch(error) {
-        showMessage('Erro', 'error');
+    console.log('Dados Missão:', data);
+    
+    if(id) {
+        db.collection('missao').doc(id).update(data)
+            .then(function() {
+                console.log('Missão atualizada!');
+                showMessage('Missão atualizada!');
+                resetForm('mi');
+                loadMissao();
+            })
+            .catch(function(error) {
+                console.error('Erro:', error);
+                showMessage('Erro: ' + error.message, 'error');
+            });
+    } else {
+        db.collection('missao').add(data)
+            .then(function(docRef) {
+                console.log('Missão salva com ID:', docRef.id);
+                showMessage('Missão salva!');
+                resetForm('mi');
+                loadMissao();
+            })
+            .catch(function(error) {
+                console.error('Erro:', error);
+                showMessage('Erro: ' + error.message, 'error');
+            });
     }
 }
 
 async function loadMissao() {
-    const container = document.getElementById('listaMissao');
+    var container = document.getElementById('listaMissao');
     container.innerHTML = '<div class="loading">Carregando...</div>';
     
     try {
-        const snapshot = await db.collection('missao').orderBy('data', 'desc').get();
+        var snapshot = await db.collection('missao').orderBy('data', 'desc').get();
         
         if(snapshot.empty) {
             container.innerHTML = '<div class="empty-state">Nenhum registro</div>';
@@ -523,7 +629,7 @@ async function loadMissao() {
         }
         
         container.innerHTML = '';
-        snapshot.forEach(doc => {
+        snapshot.forEach(function(doc) {
             container.innerHTML += createMissaoCard(doc.id, doc.data());
             listenComments('missao', doc.id);
         });
@@ -564,8 +670,8 @@ function createMissaoCard(id, data) {
 }
 
 async function editMissao(id) {
-    const doc = await db.collection('missao').doc(id).get();
-    const data = doc.data();
+    var doc = await db.collection('missao').doc(id).get();
+    var data = doc.data();
     
     document.getElementById('miId').value = id;
     document.getElementById('miData').value = data.data;
@@ -577,11 +683,11 @@ async function editMissao(id) {
 }
 
 // ==========================================
-// CATEQUIZANDOS
+// CATEQUIZANDOS - SALVAR
 // ==========================================
-async function saveCatequizando() {
-    const id = document.getElementById('catId').value;
-    const data = {
+function saveCatequizando() {
+    var id = document.getElementById('catId').value;
+    var data = {
         nome: document.getElementById('catNome').value,
         idade: parseInt(document.getElementById('catIdade').value),
         turma: document.getElementById('catTurma').value,
@@ -590,37 +696,53 @@ async function saveCatequizando() {
         observacoes: document.getElementById('catObservacoes').value
     };
     
-    try {
-        if(id) {
-            await db.collection('catequizandos').doc(id).update(data);
-            showMessage('Atualizado!');
-        } else {
-            await db.collection('catequizandos').add(data);
-            showMessage('Cadastrado!');
-        }
-        resetForm('cat');
-        loadCatequizandos();
-    } catch(error) {
-        showMessage('Erro', 'error');
+    console.log('Dados Catequizando:', data);
+    
+    if(id) {
+        db.collection('catequizandos').doc(id).update(data)
+            .then(function() {
+                console.log('Catequizando atualizado!');
+                showMessage('Catequizando atualizado!');
+                resetForm('cat');
+                loadCatequizandos();
+            })
+            .catch(function(error) {
+                console.error('Erro:', error);
+                showMessage('Erro: ' + error.message, 'error');
+            });
+    } else {
+        db.collection('catequizandos').add(data)
+            .then(function(docRef) {
+                console.log('Catequizando salvo com ID:', docRef.id);
+                showMessage('Catequizando cadastrado!');
+                resetForm('cat');
+                loadCatequizandos();
+            })
+            .catch(function(error) {
+                console.error('Erro:', error);
+                showMessage('Erro: ' + error.message, 'error');
+            });
     }
 }
 
 async function loadCatequizandos() {
-    const container = document.getElementById('listaCatequizandos');
+    var container = document.getElementById('listaCatequizandos');
     container.innerHTML = '<div class="loading">Carregando...</div>';
     
     try {
-        const snapshot = await db.collection('catequizandos').orderBy('nome').get();
+        var snapshot = await db.collection('catequizandos').orderBy('nome').get();
         
         if(snapshot.empty) {
             container.innerHTML = '<div class="empty-state">Nenhum catequizando</div>';
             return;
         }
         
-        catequizandosData = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-        }));
+        catequizandosData = snapshot.docs.map(function(doc) {
+            return {
+                id: doc.id,
+                ...doc.data()
+            };
+        });
         
         filterCatequizandos();
     } catch(error) {
@@ -629,13 +751,13 @@ async function loadCatequizandos() {
 }
 
 function filterCatequizandos() {
-    const search = document.getElementById('searchCatequizando').value.toLowerCase();
-    const turmaFilter = document.getElementById('filterTurma').value;
-    const container = document.getElementById('listaCatequizandos');
+    var search = document.getElementById('searchCatequizando').value.toLowerCase();
+    var turmaFilter = document.getElementById('filterTurma').value;
+    var container = document.getElementById('listaCatequizandos');
     
-    let filtered = catequizandosData.filter(cat => {
-        const matchSearch = cat.nome.toLowerCase().includes(search) || cat.turma.toLowerCase().includes(search);
-        const matchTurma = !turmaFilter || cat.turma === turmaFilter;
+    var filtered = catequizandosData.filter(function(cat) {
+        var matchSearch = cat.nome.toLowerCase().includes(search) || cat.turma.toLowerCase().includes(search);
+        var matchTurma = !turmaFilter || cat.turma === turmaFilter;
         return matchSearch && matchTurma;
     });
     
@@ -645,13 +767,13 @@ function filterCatequizandos() {
     }
     
     container.innerHTML = '';
-    filtered.forEach(cat => {
+    filtered.forEach(function(cat) {
         container.innerHTML += createCatequizandoCard(cat);
     });
 }
 
 function createCatequizandoCard(cat) {
-    const badgeClass = `badge-${cat.turma.toLowerCase()}`;
+    var badgeClass = 'badge-' + cat.turma.toLowerCase();
     return `
         <div class="record-card">
             <div class="record-header" onclick="toggleRecord('${cat.id}')">
@@ -683,7 +805,7 @@ function createCatequizandoCard(cat) {
 }
 
 async function editCatequizando(id) {
-    const cat = catequizandosData.find(c => c.id === id);
+    var cat = catequizandosData.find(function(c) { return c.id === id; });
     if(!cat) return;
     
     document.getElementById('catId').value = id;
@@ -702,10 +824,13 @@ async function editCatequizando(id) {
 // COMENTÁRIOS
 // ==========================================
 function setupComentariosModal() {
-    document.getElementById('formComentario').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await saveComentario();
-    });
+    var formComentario = document.getElementById('formComentario');
+    if(formComentario) {
+        formComentario.addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveComentario();
+        });
+    }
 }
 
 window.openComentariosModal = function(collection, id, title) {
@@ -727,8 +852,8 @@ window.closeModal = function() {
     }
 };
 
-async function loadComentarios(collection, id) {
-    const container = document.getElementById('listaComentarios');
+function loadComentarios(collection, id) {
+    var container = document.getElementById('listaComentarios');
     
     try {
         if(currentComentarioListener) {
@@ -737,13 +862,13 @@ async function loadComentarios(collection, id) {
         
         currentComentarioListener = db.collection(collection).doc(id).collection('comentarios')
             .orderBy('createdAt', 'asc')
-            .onSnapshot((snapshot) => {
+            .onSnapshot(function(snapshot) {
                 if(snapshot.empty) {
                     container.innerHTML = '<div class="empty-state" style="padding:1rem;">Nenhum comentário</div>';
                 } else {
                     container.innerHTML = '';
-                    snapshot.forEach(doc => {
-                        const com = doc.data();
+                    snapshot.forEach(function(doc) {
+                        var com = doc.data();
                         container.innerHTML += `
                             <div class="comentario-item">
                                 <div class="comentario-nome">👤 ${com.nome}</div>
@@ -755,44 +880,45 @@ async function loadComentarios(collection, id) {
                 }
             });
     } catch(error) {
+        console.error('Erro comentários:', error);
         container.innerHTML = '<div class="empty-state">Erro</div>';
     }
 }
 
-async function saveComentario() {
-    const collection = document.getElementById('comParentCollection').value;
-    const parentId = document.getElementById('comParentId').value;
-    const nome = document.getElementById('comNome').value;
-    const texto = document.getElementById('comTexto').value;
+function saveComentario() {
+    var collection = document.getElementById('comParentCollection').value;
+    var parentId = document.getElementById('comParentId').value;
+    var nome = document.getElementById('comNome').value;
+    var texto = document.getElementById('comTexto').value;
     
-    try {
-        await db.collection(collection).doc(parentId).collection('comentarios').add({
-            nome: nome,
-            texto: texto,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        
+    db.collection(collection).doc(parentId).collection('comentarios').add({
+        nome: nome,
+        texto: texto,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .then(function() {
         document.getElementById('comTexto').value = '';
         showMessage('Comentário adicionado!');
-    } catch(error) {
-        showMessage('Erro', 'error');
-    }
+    })
+    .catch(function(error) {
+        showMessage('Erro: ' + error.message, 'error');
+    });
 }
 
 function listenComments(collection, id) {
-    const container = document.getElementById(`comentarios-${id}`);
+    var container = document.getElementById('comentarios-' + id);
     if(!container) return;
     
     db.collection(collection).doc(id).collection('comentarios')
         .orderBy('createdAt', 'desc')
         .limit(3)
-        .onSnapshot((snapshot) => {
+        .onSnapshot(function(snapshot) {
             if(snapshot.empty) {
                 container.innerHTML = '<div style="color:#999;font-size:0.85rem;">Sem comentários</div>';
             } else {
                 container.innerHTML = '';
-                snapshot.forEach(doc => {
-                    const com = doc.data();
+                snapshot.forEach(function(doc) {
+                    var com = doc.data();
                     container.innerHTML += `
                         <div class="comentario-item" style="margin-bottom:0.5rem;">
                             <div class="comentario-nome">${com.nome}</div>
@@ -808,8 +934,8 @@ function listenComments(collection, id) {
 // UTILITÁRIOS
 // ==========================================
 window.toggleRecord = function(id) {
-    const content = document.getElementById(`content-${id}`);
-    const btn = content.parentElement.querySelector('.toggle-btn');
+    var content = document.getElementById('content-' + id);
+    var btn = content.parentElement.querySelector('.toggle-btn');
     
     if(content.classList.contains('expanded')) {
         content.classList.remove('expanded');
@@ -822,41 +948,42 @@ window.toggleRecord = function(id) {
     }
 };
 
-async function deleteRecord(collection, id) {
+window.deleteRecord = function(collection, id) {
     if(!confirm('Confirma exclusão?')) return;
     
-    try {
-        await db.collection(collection).doc(id).delete();
-        showMessage('Excluído!');
-        
-        const loaders = {
-            'inicioFe': loadInicioFe,
-            'evangelho': loadEvangelho,
-            'oracao': loadOração,
-            'sacramentos': loadSacramentos,
-            'missao': loadMissao,
-            'catequizandos': loadCatequizandos
-        };
-        
-        if(loaders[collection]) loaders[collection]();
-    } catch(error) {
-        showMessage('Erro', 'error');
-    }
-}
-
-window.deleteRecord = deleteRecord;
+    db.collection(collection).doc(id).delete()
+        .then(function() {
+            showMessage('Excluído!');
+            
+            var loaders = {
+                'inicioFe': loadInicioFe,
+                'evangelho': loadEvangelho,
+                'oracao': loadOração,
+                'sacramentos': loadSacramentos,
+                'missao': loadMissao,
+                'catequizandos': loadCatequizandos
+            };
+            
+            if(loaders[collection]) {
+                loaders[collection]();
+            }
+        })
+        .catch(function(error) {
+            showMessage('Erro: ' + error.message, 'error');
+        });
+};
 
 function resetForm(prefix) {
-    document.getElementById(`${prefix}Id`).value = '';
-    const form = document.getElementById(`form${prefix.charAt(0).toUpperCase() + prefix.slice(1)}`);
+    document.getElementById(prefix + 'Id').value = '';
+    var form = document.getElementById('form' + prefix.charAt(0).toUpperCase() + prefix.slice(1));
     if(form) form.reset();
     
-    const btnCancel = document.getElementById(`btnCancel${prefix.charAt(0).toUpperCase() + prefix.slice(1)}`);
+    var btnCancel = document.getElementById('btnCancel' + prefix.charAt(0).toUpperCase() + prefix.slice(1));
     if(btnCancel) btnCancel.style.display = 'none';
     
-    const btnPrimary = document.querySelector(`#form${prefix.charAt(0).toUpperCase() + prefix.slice(1)} .btn-primary`);
+    var btnPrimary = document.querySelector('#form' + prefix.charAt(0).toUpperCase() + prefix.slice(1) + ' .btn-primary');
     if(btnPrimary) {
-        const texts = {
+        var texts = {
             'fe': 'Salvar Registro',
             'mi': 'Salvar Pergunta',
             'cat': 'Salvar Catequizando'
@@ -867,35 +994,31 @@ function resetForm(prefix) {
 
 function formatDate(dateString) {
     if(!dateString) return '-';
-    const [ano, mes, dia] = dateString.split('-');
-    return `${dia}/${mes}/${ano}`;
+    var parts = dateString.split('-');
+    return parts[2] + '/' + parts[1] + '/' + parts[0];
 }
 
 function formatDateTimestamp(timestamp) {
     if(!timestamp) return 'Agora';
-    const date = timestamp.toDate();
+    var date = timestamp.toDate();
     return date.toLocaleString('pt-BR', {
         day: '2-digit', month: '2-digit', year: 'numeric',
         hour: '2-digit', minute: '2-digit'
     });
 }
 
-function showMessage(msg, type = 'success') {
-    const toast = document.createElement('div');
+function showMessage(msg, type) {
+    var toast = document.createElement('div');
     toast.textContent = msg;
-    toast.style.cssText = `
-        position:fixed;top:20px;right:20px;padding:1rem 2rem;
-        background:${type==='error'?'#dc3545':'#28a745'};color:#fff;
-        border-radius:4px;z-index:9999;animation:slideIn 0.3s;
-    `;
+    toast.style.cssText = 'position:fixed;top:20px;right:20px;padding:1rem 2rem;background:' + 
+        (type === 'error' ? '#dc3545' : '#28a745') + ';color:#fff;border-radius:4px;z-index:9999;';
     document.body.appendChild(toast);
-    setTimeout(() => {
-        toast.style.animation = 'slideOut 0.3s';
-        setTimeout(() => toast.remove(), 300);
+    setTimeout(function() {
+        toast.remove();
     }, 3000);
 }
 
-async function loadAllData() {
+function loadAllData() {
     loadInicioFe();
     loadEvangelho();
     loadOração();
@@ -905,13 +1028,8 @@ async function loadAllData() {
 }
 
 window.onclick = function(event) {
-    const modal = document.getElementById('modalComentarios');
-    if(event.target === modal) closeModal();
+    var modal = document.getElementById('modalComentarios');
+    if(event.target === modal) {
+        closeModal();
+    }
 };
-
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn { from{transform:translateX(400px);opacity:0} to{transform:translateX(0);opacity:1} }
-    @keyframes slideOut { from{transform:translateX(0);opacity:1} to{transform:translateX(400px);opacity:0} }
-`;
-document.head.appendChild(style);
