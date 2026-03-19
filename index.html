@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia da Catequese - Sistema de Gestão</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-texture"></div>
+    
+    <!-- Sidebar Fixa -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">✝</div>
+            <h1>Guia da Catequese</h1>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <button class="nav-item active" data-section="dashboard">
+                <span class="nav-icon">📖</span>
+                <span class="nav-text">Início</span>
+            </button>
+            
+            <button class="nav-item" data-section="inicio-fe">
+                <span class="nav-icon">🕊️</span>
+                <span class="nav-text">Início da Fé</span>
+            </button>
+            
+            <button class="nav-item" data-section="evangelho">
+                <span class="nav-icon">📜</span>
+                <span class="nav-text">Evangelho</span>
+            </button>
+            
+            <button class="nav-item" data-section="oracao">
+                <span class="nav-icon">🙏</span>
+                <span class="nav-text">Oração</span>
+            </button>
+            
+            <button class="nav-item" data-section="sacramentos">
+                <span class="nav-icon">✝️</span>
+                <span class="nav-text">Sacramentos</span>
+            </button>
+            
+            <button class="nav-item" data-section="missao">
+                <span class="nav-icon">🌟</span>
+                <span class="nav-text">Missão</span>
+            </button>
+            
+            <button class="nav-item" data-section="catequizandos">
+                <span class="nav-icon">👥</span>
+                <span class="nav-text">Catequizandos</span>
+            </button>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="ornament">❧ ❧</div>
+            <p>Desenvolvido por Laís Mendes</p>
+        </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        
+        <!-- SEÇÃO: DASHBOARD -->
+        <section id="dashboard" class="content-section active">
+            <div class="section-header">
+                <h2>Bem-vindo ao Guia da Catequese</h2>
+                <div class="divider"></div>
+                <p>Organize e acompanhe a jornada de fé dos seus catequizandos</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card" onclick="navigateTo('inicio-fe')">
+                    <div class="card-icon">🕊️</div>
+                    <h3>Início da Fé</h3>
+                    <p>Registre aulas e conteúdos</p>
+                </div>
+                
+                <div class="dashboard-card" onclick="navigateTo('evangelho')">
+                    <div class="card-icon">📜</div>
+                    <h3>Evangelho</h3>
+                    <p>Palavra e reflexões</p>
+                </div>
+                
+                <div class="dashboard-card" onclick="navigateTo('oracao')">
+                    <div class="card-icon">🙏</div>
+                    <h3>Oração</h3>
+                    <p>Pedidos e agradecimentos</p>
+                </div>
+                
+                <div class="dashboard-card" onclick="navigateTo('sacramentos')">
+                    <div class="card-icon">✝️</div>
+                    <h3>Sacramentos</h3>
+                    <p>Acompanhamento sacramental</p>
+                </div>
+                
+                <div class="dashboard-card" onclick="navigateTo('missao')">
+                    <div class="card-icon">🌟</div>
+                    <h3>Missão</h3>
+                    <p>Missões semanais</p>
+                </div>
+                
+                <div class="dashboard-card" onclick="navigateTo('catequizandos')">
+                    <div class="card-icon">👥</div>
+                    <h3>Catequizandos</h3>
+                    <p>Cadastro da turma</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: INÍCIO DA FÉ -->
+        <section id="inicio-fe" class="content-section">
+            <div class="section-header">
+                <h2>Início da Fé</h2>
+                <div class="divider"></div>
+                <p>Registre a aula, organize o conteúdo e acolha os comentários dos alunos</p>
+            </div>
+            
+            <div class="form-card">
+                <div class="card-header-bar">
+                    <h3><span class="ornament">❧</span> Registrar Aula <span class="ornament">❧</span></h3>
+                </div>
+                
+                <form id="formInicioFe">
+                    <input type="hidden" id="feId">
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="feData">Data da Aula</label>
+                            <input type="date" id="feData" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="feTema">Tema</label>
+                            <input type="text" id="feTema" placeholder="Ex: Acolhida / Início das aulas" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feObjetivo">Objetivo da Aula</label>
+                        <input type="text" id="feObjetivo" placeholder="Ex: Apresentar quem é Jesus">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feTexto">Texto da Aula</label>
+                        <textarea id="feTexto" rows="4" placeholder="Escreva tudo que foi debatido..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel" id="btnCancelFe" style="display:none;" onclick="resetForm('fe')">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar Registro</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="records-section">
+                <h3><span class="ornament">❧</span> Registros <span class="ornament">❧</span></h3>
+                <div id="listaInicioFe" class="records-list">
+                    <div class="loading">Carregando registros...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: EVANGELHO -->
+        <section id="evangelho" class="content-section">
+            <div class="section-header">
+                <h2>Evangelho</h2>
+                <div class="divider"></div>
+                <p>Guarde a Palavra, registre a reflexão e acolha as respostas da turma</p>
+            </div>
+            
+            <div class="form-card">
+                <div class="card-header-bar">
+                    <h3><span class="ornament">❧</span> Registrar Evangelho <span class="ornament">❧</span></h3>
+                </div>
+                
+                <form id="formEvangelho">
+                    <input type="hidden" id="evId">
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="evData">Data</label>
+                            <input type="date" id="evData" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="evReferencia">Referência</label>
+                            <input type="text" id="evReferencia" placeholder="Ex: Jo 4,5-42" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="evFrase">Frase-Chave</label>
+                        <input type="text" id="evFrase" placeholder="Ex: Quem tem sede, venha a mim">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="evTexto">Texto</label>
+                        <textarea id="evTexto" rows="4" placeholder="Cole o evangelho, escreva a reflexão..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel" id="btnCancelEv" style="display:none;" onclick="resetForm('ev')">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="records-section">
+                <h3><span class="ornament">❧</span> Registros <span class="ornament">❧</span></h3>
+                <div id="listaEvangelho" class="records-list">
+                    <div class="loading">Carregando registros...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: ORAÇÃO -->
+        <section id="oracao" class="content-section">
+            <div class="section-header">
+                <h2>Oração</h2>
+                <div class="divider"></div>
+                <p>Reúna pedidos, agradecimentos e intenções com acolhimento</p>
+            </div>
+            
+            <div class="form-card">
+                <div class="card-header-bar">
+                    <h3><span class="ornament">❧</span> Pedidos e Agradecimentos <span class="ornament">❧</span></h3>
+                </div>
+                
+                <form id="formOração">
+                    <input type="hidden" id="orId">
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="orData">Data</label>
+                            <input type="date" id="orData" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orTipo">Tipo</label>
+                            <select id="orTipo" required>
+                                <option value="Pedido">Pedido</option>
+                                <option value="Agradecimento">Agradecimento</option>
+                                <option value="Intenção">Intenção</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orCausa">Causa / Intenção</label>
+                        <input type="text" id="orCausa" placeholder="Ex: saúde, família, gratidão...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orDetalhes">Detalhes</label>
+                        <textarea id="orDetalhes" rows="3" placeholder="Escreva a intenção..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel" id="btnCancelOr" style="display:none;" onclick="resetForm('or')">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="records-section">
+                <h3><span class="ornament">❧</span> Registros <span class="ornament">❧</span></h3>
+                <div id="listaOração" class="records-list">
+                    <div class="loading">Carregando registros...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: SACRAMENTOS -->
+        <section id="sacramentos" class="content-section">
+            <div class="section-header">
+                <h2>Sacramentos</h2>
+                <div class="divider"></div>
+                <p>Acompanhe o preparo e a reflexão espiritual</p>
+            </div>
+            
+            <div class="form-card">
+                <div class="card-header-bar">
+                    <h3><span class="ornament">❧</span> Registro Sacramental <span class="ornament">❧</span></h3>
+                </div>
+                
+                <form id="formSacramentos">
+                    <input type="hidden" id="saId">
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="saData">Data</label>
+                            <input type="date" id="saData" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="saSacramento">Sacramento</label>
+                            <input type="text" id="saSacramento" placeholder="Ex: Eucaristia / Confissão" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="saCompromisso">Compromisso da Semana</label>
+                        <input type="text" id="saCompromisso" placeholder="Ex: Rezar antes das refeições">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="saReflexao">Reflexão</label>
+                        <textarea id="saReflexao" rows="3" placeholder="O que foi aprendido?"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel" id="btnCancelSa" style="display:none;" onclick="resetForm('sa')">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="records-section">
+                <h3><span class="ornament">❧</span> Registros <span class="ornament">❧</span></h3>
+                <div id="listaSacramentos" class="records-list">
+                    <div class="loading">Carregando registros...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: MISSÃO -->
+        <section id="missao" class="content-section">
+            <div class="section-header">
+                <h2>Missão</h2>
+                <div class="divider"></div>
+                <p>Transforme a reflexão em atitude concreta</p>
+            </div>
+            
+            <div class="form-card">
+                <div class="card-header-bar">
+                    <h3><span class="ornament">❧</span> Missão da Semana <span class="ornament">❧</span></h3>
+                </div>
+                
+                <form id="formMissao">
+                    <input type="hidden" id="miId">
+                    
+                    <div class="form-group">
+                        <label for="miData">Data</label>
+                        <input type="date" id="miData" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="miPergunta">Pergunta</label>
+                        <input type="text" id="miPergunta" placeholder="Ex: O que Jesus quer de mim?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="miObjetivo">Objetivo da Missão</label>
+                        <input type="text" id="miObjetivo" placeholder="Ex: Atitude de amor ao próximo">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel" id="btnCancelMi" style="display:none;" onclick="resetForm('mi')">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar Pergunta</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="records-section">
+                <h3><span class="ornament">❧</span> Perguntas <span class="ornament">❧</span></h3>
+                <div id="listaMissao" class="records-list">
+                    <div class="loading">Carregando registros...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: CATEQUIZANDOS -->
+        <section id="catequizandos" class="content-section">
+            <div class="section-header">
+                <h2>Catequizandos</h2>
+                <div class="divider"></div>
+                <p>Cadastre e gerencie os membros da turma</p>
+            </div>
+            
+            <div class="form-card">
+                <div class="card-header-bar">
+                    <h3><span class="ornament">❧</span> Cadastrar Catequizando <span class="ornament">❧</span></h3>
+                </div>
+                
+                <form id="formCatequizandos">
+                    <input type="hidden" id="catId">
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="catNome">Nome Completo</label>
+                            <input type="text" id="catNome" placeholder="Digite o nome completo" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="catIdade">Idade</label>
+                            <input type="number" id="catIdade" placeholder="Ex: 14" min="5" max="100" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="catTurma">Turma</label>
+                            <select id="catTurma" required>
+                                <option value="">Selecione a turma</option>
+                                <option value="Crisma">Crisma</option>
+                                <option value="Eucaristia">Eucaristia</option>
+                                <option value="Batismo">Batismo</option>
+                                <option value="Iniciação">Iniciação</option>
+                                <option value="Outra">Outra</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="catLocal">Local</label>
+                            <input type="text" id="catLocal" placeholder="Ex: Paróquia São José" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="catContato">Contato (Responsável)</label>
+                        <input type="text" id="catContato" placeholder="Telefone ou email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="catObservacoes">Observações</label>
+                        <textarea id="catObservacoes" rows="2" placeholder="Informações adicionais..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel" id="btnCancelCat" style="display:none;" onclick="resetForm('cat')">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar Catequizando</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="records-section">
+                <h3><span class="ornament">❧</span> Catequizandos Cadastrados <span class="ornament">❧</span></h3>
+                <div class="filter-bar">
+                    <input type="text" id="searchCatequizando" placeholder="Buscar por nome ou turma..." class="search-input">
+                    <select id="filterTurma" class="filter-select">
+                        <option value="">Todas as Turmas</option>
+                        <option value="Crisma">Crisma</option>
+                        <option value="Eucaristia">Eucaristia</option>
+                        <option value="Batismo">Batismo</option>
+                        <option value="Iniciação">Iniciação</option>
+                    </select>
+                </div>
+                <div id="listaCatequizandos" class="records-list">
+                    <div class="loading">Carregando catequizandos...</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal de Comentários -->
+    <div id="modalComentarios" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><span class="ornament">❧</span> Comentários <span class="ornament">❧</span></h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="modalTitulo" class="modal-titulo"></div>
+                
+                <div id="listaComentarios" class="comentarios-list">
+                    <!-- Comentários serão carregados aqui -->
+                </div>
+                
+                <div class="form-comentario">
+                    <h4>Adicionar Comentário</h4>
+                    <form id="formComentario">
+                        <input type="hidden" id="comParentCollection">
+                        <input type="hidden" id="comParentId">
+                        
+                        <div class="form-group">
+                            <label for="comNome">Nome do Aluno</label>
+                            <input type="text" id="comNome" placeholder="Digite seu nome" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="comTexto">Comentário</label>
+                            <textarea id="comTexto" rows="3" placeholder="O que você achou?" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Adicionar Comentário</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
