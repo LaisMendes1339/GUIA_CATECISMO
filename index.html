@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sistema de gestão para catequese: registre aulas, evangelhos, orações e acompanhe catequizandos.">
+    <meta name="description" content="Sistema de gestão para catequese">
     <title>Guia da Catequese - Sistema de Gestão</title>
     
-    <!-- Preconnect otimizado -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -14,18 +13,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Skip link para acessibilidade -->
     <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
     
-    <!-- Background decorativo -->
     <div class="bg-texture" aria-hidden="true"></div>
     
-    <!-- Botão toggle mobile -->
-    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu" aria-expanded="false">
         <span class="hamburger" aria-hidden="true"></span>
     </button>
     
-    <!-- Sidebar -->
     <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
         <div class="sidebar-header">
             <div class="logo" aria-hidden="true">✝</div>
@@ -66,11 +61,10 @@
         
         <div class="sidebar-footer">
             <div class="ornament" aria-hidden="true"></div>
-            <p>Ad Majorem Dei Gloriam</p>
+            <p>Desenvolvido por Laís Mendes | 2026</p>
         </div>
     </aside>
 
-    <!-- Conteúdo Principal -->
     <main class="main-content" id="main-content" tabindex="-1">
         
         <!-- DASHBOARD -->
@@ -149,7 +143,7 @@
                         <textarea id="feTexto" rows="4" placeholder="Escreva tudo que foi debatido..."></textarea>
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel hidden" id="btnCancelFe">Cancelar</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelFe">Cancelar Edição</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitFe">
                             <span class="btn-text">Salvar Registro</span>
                             <span class="btn-loading hidden">Salvando...</span>
@@ -160,7 +154,9 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaInicioFe" class="records-list" aria-live="polite"></div>
+                <div id="listaInicioFe" class="records-list" aria-live="polite">
+                    <div class="loading">Carregando registros...</div>
+                </div>
             </div>
         </section>
 
@@ -198,7 +194,7 @@
                         <textarea id="evTexto" rows="4" placeholder="Cole o evangelho, escreva a reflexão..."></textarea>
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel hidden" id="btnCancelEv">Cancelar</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelEv">Cancelar Edição</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitEv">
                             <span class="btn-text">Salvar</span>
                             <span class="btn-loading hidden">Salvando...</span>
@@ -209,11 +205,13 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaEvangelho" class="records-list" aria-live="polite"></div>
+                <div id="listaEvangelho" class="records-list" aria-live="polite">
+                    <div class="loading">Carregando registros...</div>
+                </div>
             </div>
         </section>
 
-        <!-- ORAÇÃO (ID sem acento) -->
+        <!-- ORAÇÃO -->
         <section id="oracao" class="content-section" aria-labelledby="oracao-title" hidden>
             <div class="section-header">
                 <h2 id="oracao-title">Oração</h2>
@@ -251,7 +249,7 @@
                         <textarea id="orDetalhes" rows="3" placeholder="Escreva a intenção..."></textarea>
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel hidden" id="btnCancelOr">Cancelar</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelOr">Cancelar Edição</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitOr">
                             <span class="btn-text">Salvar</span>
                             <span class="btn-loading hidden">Salvando...</span>
@@ -262,7 +260,9 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaOracao" class="records-list" aria-live="polite"></div>
+                <div id="listaOracao" class="records-list" aria-live="polite">
+                    <div class="loading">Carregando registros...</div>
+                </div>
             </div>
         </section>
 
@@ -300,7 +300,7 @@
                         <textarea id="saReflexao" rows="3" placeholder="O que foi aprendido?"></textarea>
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel hidden" id="btnCancelSa">Cancelar</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelSa">Cancelar Edição</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitSa">
                             <span class="btn-text">Salvar</span>
                             <span class="btn-loading hidden">Salvando...</span>
@@ -311,7 +311,9 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaSacramentos" class="records-list" aria-live="polite"></div>
+                <div id="listaSacramentos" class="records-list" aria-live="polite">
+                    <div class="loading">Carregando registros...</div>
+                </div>
             </div>
         </section>
 
@@ -343,7 +345,7 @@
                         <input type="text" id="miObjetivo" placeholder="Ex: Atitude de amor ao próximo">
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel hidden" id="btnCancelMi">Cancelar</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelMi">Cancelar Edição</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitMi">
                             <span class="btn-text">Salvar Pergunta</span>
                             <span class="btn-loading hidden">Salvando...</span>
@@ -354,7 +356,9 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Perguntas <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaMissao" class="records-list" aria-live="polite"></div>
+                <div id="listaMissao" class="records-list" aria-live="polite">
+                    <div class="loading">Carregando registros...</div>
+                </div>
             </div>
         </section>
 
@@ -409,7 +413,7 @@
                         <textarea id="catObservacoes" rows="2" placeholder="Informações adicionais..."></textarea>
                     </div>
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel hidden" id="btnCancelCat">Cancelar</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelCat">Cancelar Edição</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitCat">
                             <span class="btn-text">Salvar Catequizando</span>
                             <span class="btn-loading hidden">Salvando...</span>
@@ -432,7 +436,9 @@
                         <option value="Iniciação">Iniciação</option>
                     </select>
                 </div>
-                <div id="listaCatequizandos" class="records-list" aria-live="polite"></div>
+                <div id="listaCatequizandos" class="records-list" aria-live="polite">
+                    <div class="loading">Carregando catequizandos...</div>
+                </div>
             </div>
         </section>
 
@@ -474,11 +480,10 @@
     <!-- Toast Container -->
     <div id="toastContainer" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
 
-    <!-- Firebase SDKs Compat -->
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
-    <!-- Script principal -->
     <script src="script.js" defer></script>
 </body>
 </html>
