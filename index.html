@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de gestão para catequese: registre aulas, evangelhos, orações e acompanhe catequizandos.">
     <title>Guia da Catequese - Sistema de Gestão</title>
     
+    <!-- Preconnect otimizado (sem espaços) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,123 +14,135 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="bg-texture"></div>
+    <!-- Skip link para acessibilidade -->
+    <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
+    
+    <!-- Elemento decorativo de fundo (gerado via CSS) -->
+    <div class="bg-texture" aria-hidden="true"></div>
+    
+    <!-- Botão de toggle para mobile (inicialmente oculto, exibido via CSS media query) -->
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+        <span class="hamburger" aria-hidden="true"></span>
+    </button>
     
     <!-- Sidebar Fixa -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
         <div class="sidebar-header">
-            <div class="logo">✝</div>
+            <div class="logo" aria-hidden="true">✝</div>
             <h1>Guia da Catequese</h1>
             <p class="sidebar-subtitle">Gestão da Fé</p>
         </div>
         
         <nav class="sidebar-nav">
-            <button class="nav-item active" data-section="dashboard">
-                <span class="nav-icon">📖</span>
+            <!-- Botões com data-section para navegação via JS -->
+            <button class="nav-item active" data-section="dashboard" aria-current="page">
+                <span class="nav-icon" aria-hidden="true">📖</span>
                 <span class="nav-text">Início</span>
             </button>
             
             <button class="nav-item" data-section="inicio-fe">
-                <span class="nav-icon">🕊️</span>
+                <span class="nav-icon" aria-hidden="true">🕊️</span>
                 <span class="nav-text">Início da Fé</span>
             </button>
             
             <button class="nav-item" data-section="evangelho">
-                <span class="nav-icon">📜</span>
+                <span class="nav-icon" aria-hidden="true">📜</span>
                 <span class="nav-text">Evangelho</span>
             </button>
             
             <button class="nav-item" data-section="oracao">
-                <span class="nav-icon">🙏</span>
+                <span class="nav-icon" aria-hidden="true">🙏</span>
                 <span class="nav-text">Oração</span>
             </button>
             
             <button class="nav-item" data-section="sacramentos">
-                <span class="nav-icon">✝️</span>
+                <span class="nav-icon" aria-hidden="true">✝️</span>
                 <span class="nav-text">Sacramentos</span>
             </button>
             
             <button class="nav-item" data-section="missao">
-                <span class="nav-icon">🌟</span>
+                <span class="nav-icon" aria-hidden="true">🌟</span>
                 <span class="nav-text">Missão</span>
             </button>
             
             <button class="nav-item" data-section="catequizandos">
-                <span class="nav-icon">👥</span>
+                <span class="nav-icon" aria-hidden="true">👥</span>
                 <span class="nav-text">Catequizandos</span>
             </button>
         </nav>
         
         <div class="sidebar-footer">
-            <div class="ornament">❧ ❧</div>
+            <div class="ornament" aria-hidden="true"></div>
             <p>Ad Majorem Dei Gloriam</p>
         </div>
     </aside>
 
     <!-- Conteúdo Principal -->
-    <main class="main-content">
+    <main class="main-content" id="main-content" tabindex="-1">
         
         <!-- SEÇÃO: DASHBOARD -->
-        <section id="dashboard" class="content-section active">
+        <section id="dashboard" class="content-section active" aria-labelledby="dashboard-title">
             <div class="section-header">
-                <h2>Bem-vindo ao Guia da Catequese</h2>
-                <div class="divider"></div>
+                <h2 id="dashboard-title">Bem-vindo ao Guia da Catequese</h2>
+                <div class="divider" aria-hidden="true"></div>
                 <p>Organize e acompanhe a jornada de fé dos seus catequizandos</p>
             </div>
             
             <div class="dashboard-grid">
-                <div class="dashboard-card" onclick="navigateTo('inicio-fe')">
-                    <div class="card-icon">🕊️</div>
+                <!-- Cards agora são botões para acessibilidade e semântica -->
+                <button class="dashboard-card" data-navigate="inicio-fe">
+                    <div class="card-icon" aria-hidden="true">🕊️</div>
                     <h3>Início da Fé</h3>
                     <p>Registre aulas e conteúdos</p>
-                </div>
+                </button>
                 
-                <div class="dashboard-card" onclick="navigateTo('evangelho')">
-                    <div class="card-icon">📜</div>
+                <button class="dashboard-card" data-navigate="evangelho">
+                    <div class="card-icon" aria-hidden="true">📜</div>
                     <h3>Evangelho</h3>
                     <p>Palavra e reflexões</p>
-                </div>
+                </button>
                 
-                <div class="dashboard-card" onclick="navigateTo('oracao')">
-                    <div class="card-icon">🙏</div>
+                <button class="dashboard-card" data-navigate="oracao">
+                    <div class="nav-icon" aria-hidden="true">🙏</div>
                     <h3>Oração</h3>
                     <p>Pedidos e agradecimentos</p>
-                </div>
+                </button>
                 
-                <div class="dashboard-card" onclick="navigateTo('sacramentos')">
-                    <div class="card-icon">✝️</div>
+                <button class="dashboard-card" data-navigate="sacramentos">
+                    <div class="card-icon" aria-hidden="true">✝️</div>
                     <h3>Sacramentos</h3>
                     <p>Acompanhamento sacramental</p>
-                </div>
+                </button>
                 
-                <div class="dashboard-card" onclick="navigateTo('missao')">
-                    <div class="card-icon">🌟</div>
+                <button class="dashboard-card" data-navigate="missao">
+                    <div class="card-icon" aria-hidden="true">🌟</div>
                     <h3>Missão</h3>
                     <p>Missões semanais</p>
-                </div>
+                </button>
                 
-                <div class="dashboard-card" onclick="navigateTo('catequizandos')">
-                    <div class="card-icon">👥</div>
+                <button class="dashboard-card" data-navigate="catequizandos">
+                    <div class="card-icon" aria-hidden="true">👥</div>
                     <h3>Catequizandos</h3>
                     <p>Cadastro da turma</p>
-                </div>
+                </button>
             </div>
         </section>
 
         <!-- SEÇÃO: INÍCIO DA FÉ -->
-        <section id="inicio-fe" class="content-section">
+        <section id="inicio-fe" class="content-section" aria-labelledby="inicio-fe-title" hidden>
             <div class="section-header">
-                <h2>Início da Fé</h2>
-                <div class="divider"></div>
+                <h2 id="inicio-fe-title">Início da Fé</h2>
+                <div class="divider" aria-hidden="true"></div>
                 <p>Registre a aula, organize o conteúdo e acolha os comentários dos alunos</p>
             </div>
             
             <div class="form-card">
                 <div class="card-header-bar">
-                    <h3><span class="ornament">❧</span> Registrar Aula <span class="ornament">❧</span></h3>
+                    <h3><span class="ornament" aria-hidden="true"></span> Registrar Aula <span class="ornament" aria-hidden="true"></span></h3>
                 </div>
                 
-                <form id="formInicioFe">
+                <!-- ID corrigido: sem acento -->
+                <form id="formInicioFe" novalidate>
                     <input type="hidden" id="feId">
                     
                     <div class="form-grid">
@@ -154,34 +168,38 @@
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel" id="btnCancelFe" style="display:none;" onclick="resetForm('fe')">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar Registro</button>
+                        <!-- Classe utilitária para esconder, sem estilo inline -->
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelFe">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmitFe">
+                            <span class="btn-text">Salvar Registro</span>
+                            <span class="btn-loading hidden">Salvando...</span>
+                        </button>
                     </div>
                 </form>
             </div>
             
             <div class="records-section">
-                <h3><span class="ornament">❧</span> Registros <span class="ornament">❧</span></h3>
-                <div id="listaInicioFe" class="records-list">
+                <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
+                <div id="listaInicioFe" class="records-list" aria-live="polite">
                     <div class="loading">Carregando registros...</div>
                 </div>
             </div>
         </section>
 
         <!-- SEÇÃO: EVANGELHO -->
-        <section id="evangelho" class="content-section">
+        <section id="evangelho" class="content-section" aria-labelledby="evangelho-title" hidden>
             <div class="section-header">
-                <h2>Evangelho</h2>
-                <div class="divider"></div>
+                <h2 id="evangelho-title">Evangelho</h2>
+                <div class="divider" aria-hidden="true"></div>
                 <p>Guarde a Palavra, registre a reflexão e acolha as respostas da turma</p>
             </div>
             
             <div class="form-card">
                 <div class="card-header-bar">
-                    <h3><span class="ornament">❧</span> Registrar Evangelho <span class="ornament">❧</span></h3>
+                    <h3><span class="ornament" aria-hidden="true"></span> Registrar Evangelho <span class="ornament" aria-hidden="true"></span></h3>
                 </div>
                 
-                <form id="formEvangelho">
+                <form id="formEvangelho" novalidate>
                     <input type="hidden" id="evId">
                     
                     <div class="form-grid">
@@ -207,34 +225,38 @@
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel" id="btnCancelEv" style="display:none;" onclick="resetForm('ev')">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelEv">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmitEv">
+                            <span class="btn-text">Salvar</span>
+                            <span class="btn-loading hidden">Salvando...</span>
+                        </button>
                     </div>
                 </form>
             </div>
             
             <div class="records-section">
-                <h3><span class="ornament">❧</span> Registros <span class="ornament">❧</span></h3>
-                <div id="listaEvangelho" class="records-list">
+                <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
+                <div id="listaEvangelho" class="records-list" aria-live="polite">
                     <div class="loading">Carregando registros...</div>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO: ORAÇÃO -->
-        <section id="oracao" class="content-section">
+        <!-- SEÇÃO: ORAÇÃO (ID corrigido: sem acento) -->
+        <section id="oracao" class="content-section" aria-labelledby="oracao-title" hidden>
             <div class="section-header">
-                <h2>Oração</h2>
-                <div class="divider"></div>
+                <h2 id="oracao-title">Oração</h2>
+                <div class="divider" aria-hidden="true"></div>
                 <p>Reúna pedidos, agradecimentos e intenções com acolhimento</p>
             </div>
             
             <div class="form-card">
                 <div class="card-header-bar">
-                    <h3><span class="ornament">❧</span> Pedidos e Agradecimentos <span class="ornament">❧</span></h3>
+                    <h3><span class="ornament" aria-hidden="true"></span> Pedidos e Agradecimentos <span class="ornament" aria-hidden="true"></span></h3>
                 </div>
                 
-                <form id="formOração">
+                <!-- ID corrigido: formOracao (sem acento) -->
+                <form id="formOracao" novalidate>
                     <input type="hidden" id="orId">
                     
                     <div class="form-grid">
@@ -264,34 +286,37 @@
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel" id="btnCancelOr" style="display:none;" onclick="resetForm('or')">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelOr">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmitOr">
+                            <span class="btn-text">Salvar</span>
+                            <span class="btn-loading hidden">Salvando...</span>
+                        </button>
                     </div>
                 </form>
             </div>
             
             <div class="records-section">
-                <h3><span class="ornament">❧</span> Registros <span class="ornament">❧</span></h3>
-                <div id="listaOração" class="records-list">
+                <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
+                <div id="listaOracao" class="records-list" aria-live="polite">
                     <div class="loading">Carregando registros...</div>
                 </div>
             </div>
         </section>
 
         <!-- SEÇÃO: SACRAMENTOS -->
-        <section id="sacramentos" class="content-section">
+        <section id="sacramentos" class="content-section" aria-labelledby="sacramentos-title" hidden>
             <div class="section-header">
-                <h2>Sacramentos</h2>
-                <div class="divider"></div>
+                <h2 id="sacramentos-title">Sacramentos</h2>
+                <div class="divider" aria-hidden="true"></div>
                 <p>Acompanhe o preparo e a reflexão espiritual</p>
             </div>
             
             <div class="form-card">
                 <div class="card-header-bar">
-                    <h3><span class="ornament">❧</span> Registro Sacramental <span class="ornament">❧</span></h3>
+                    <h3><span class="ornament" aria-hidden="true"></span> Registro Sacramental <span class="ornament" aria-hidden="true"></span></h3>
                 </div>
                 
-                <form id="formSacramentos">
+                <form id="formSacramentos" novalidate>
                     <input type="hidden" id="saId">
                     
                     <div class="form-grid">
@@ -317,34 +342,37 @@
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel" id="btnCancelSa" style="display:none;" onclick="resetForm('sa')">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelSa">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmitSa">
+                            <span class="btn-text">Salvar</span>
+                            <span class="btn-loading hidden">Salvando...</span>
+                        </button>
                     </div>
                 </form>
             </div>
             
             <div class="records-section">
-                <h3><span class="ornament">❧</span> Registros <span class="ornament">❧</span></h3>
-                <div id="listaSacramentos" class="records-list">
+                <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
+                <div id="listaSacramentos" class="records-list" aria-live="polite">
                     <div class="loading">Carregando registros...</div>
                 </div>
             </div>
         </section>
 
         <!-- SEÇÃO: MISSÃO -->
-        <section id="missao" class="content-section">
+        <section id="missao" class="content-section" aria-labelledby="missao-title" hidden>
             <div class="section-header">
-                <h2>Missão</h2>
-                <div class="divider"></div>
+                <h2 id="missao-title">Missão</h2>
+                <div class="divider" aria-hidden="true"></div>
                 <p>Transforme a reflexão em atitude concreta</p>
             </div>
             
             <div class="form-card">
                 <div class="card-header-bar">
-                    <h3><span class="ornament">❧</span> Missão da Semana <span class="ornament">❧</span></h3>
+                    <h3><span class="ornament" aria-hidden="true"></span> Missão da Semana <span class="ornament" aria-hidden="true"></span></h3>
                 </div>
                 
-                <form id="formMissao">
+                <form id="formMissao" novalidate>
                     <input type="hidden" id="miId">
                     
                     <div class="form-group">
@@ -363,34 +391,37 @@
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel" id="btnCancelMi" style="display:none;" onclick="resetForm('mi')">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar Pergunta</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelMi">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmitMi">
+                            <span class="btn-text">Salvar Pergunta</span>
+                            <span class="btn-loading hidden">Salvando...</span>
+                        </button>
                     </div>
                 </form>
             </div>
             
             <div class="records-section">
-                <h3><span class="ornament">❧</span> Perguntas <span class="ornament">❧</span></h3>
-                <div id="listaMissao" class="records-list">
+                <h3><span class="ornament" aria-hidden="true"></span> Perguntas <span class="ornament" aria-hidden="true"></span></h3>
+                <div id="listaMissao" class="records-list" aria-live="polite">
                     <div class="loading">Carregando registros...</div>
                 </div>
             </div>
         </section>
 
         <!-- SEÇÃO: CATEQUIZANDOS -->
-        <section id="catequizandos" class="content-section">
+        <section id="catequizandos" class="content-section" aria-labelledby="catequizandos-title" hidden>
             <div class="section-header">
-                <h2>Catequizandos</h2>
-                <div class="divider"></div>
+                <h2 id="catequizandos-title">Catequizandos</h2>
+                <div class="divider" aria-hidden="true"></div>
                 <p>Cadastre e gerencie os membros da turma</p>
             </div>
             
             <div class="form-card">
                 <div class="card-header-bar">
-                    <h3><span class="ornament">❧</span> Cadastrar Catequizando <span class="ornament">❧</span></h3>
+                    <h3><span class="ornament" aria-hidden="true"></span> Cadastrar Catequizando <span class="ornament" aria-hidden="true"></span></h3>
                 </div>
                 
-                <form id="formCatequizandos">
+                <form id="formCatequizandos" novalidate>
                     <input type="hidden" id="catId">
                     
                     <div class="form-grid">
@@ -435,16 +466,21 @@
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn btn-cancel" id="btnCancelCat" style="display:none;" onclick="resetForm('cat')">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar Catequizando</button>
+                        <button type="button" class="btn btn-cancel hidden" id="btnCancelCat">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmitCat">
+                            <span class="btn-text">Salvar Catequizando</span>
+                            <span class="btn-loading hidden">Salvando...</span>
+                        </button>
                     </div>
                 </form>
             </div>
             
             <div class="records-section">
-                <h3><span class="ornament">❧</span> Catequizandos Cadastrados <span class="ornament">❧</span></h3>
+                <h3><span class="ornament" aria-hidden="true"></span> Catequizandos Cadastrados <span class="ornament" aria-hidden="true"></span></h3>
                 <div class="filter-bar">
+                    <label for="searchCatequizando" class="visually-hidden">Buscar catequizando</label>
                     <input type="text" id="searchCatequizando" placeholder="Buscar por nome ou turma..." class="search-input">
+                    <label for="filterTurma" class="visually-hidden">Filtrar por turma</label>
                     <select id="filterTurma" class="filter-select">
                         <option value="">Todas as Turmas</option>
                         <option value="Crisma">Crisma</option>
@@ -453,7 +489,7 @@
                         <option value="Iniciação">Iniciação</option>
                     </select>
                 </div>
-                <div id="listaCatequizandos" class="records-list">
+                <div id="listaCatequizandos" class="records-list" aria-live="polite">
                     <div class="loading">Carregando catequizandos...</div>
                 </div>
             </div>
@@ -461,23 +497,23 @@
 
     </main>
 
-    <!-- Modal de Comentários -->
-    <div id="modalComentarios" class="modal">
+    <!-- Modal de Comentários (com ARIA completo) -->
+    <div id="modalComentarios" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalComentariosTitle" hidden>
         <div class="modal-content">
             <div class="modal-header">
-                <h3><span class="ornament">❧</span> Comentários <span class="ornament">❧</span></h3>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <h3 id="modalComentariosTitle"><span class="ornament" aria-hidden="true"></span> Comentários <span class="ornament" aria-hidden="true"></span></h3>
+                <button class="modal-close" id="modalClose" aria-label="Fechar modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div id="modalTitulo" class="modal-titulo"></div>
                 
-                <div id="listaComentarios" class="comentarios-list">
+                <div id="listaComentarios" class="comentarios-list" aria-live="polite">
                     <!-- Comentários serão carregados aqui -->
                 </div>
                 
                 <div class="form-comentario">
                     <h4>Adicionar Comentário</h4>
-                    <form id="formComentario">
+                    <form id="formComentario" novalidate>
                         <input type="hidden" id="comParentCollection">
                         <input type="hidden" id="comParentId">
                         
@@ -491,17 +527,24 @@
                             <textarea id="comTexto" rows="3" placeholder="O que você achou?" required></textarea>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary btn-block">Adicionar Comentário</button>
+                        <button type="submit" class="btn btn-primary btn-block" id="btnSubmitComentario">
+                            <span class="btn-text">Adicionar Comentário</span>
+                            <span class="btn-loading hidden">Enviando...</span>
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
+    <!-- Toast container para mensagens -->
+    <div id="toastContainer" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Firebase SDKs (versão compat para browser) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
-    <script src="script.js"></script>
+    <!-- Script principal com defer para garantir carregamento após DOM -->
+    <script src="script.js" defer></script>
 </body>
 </html>
