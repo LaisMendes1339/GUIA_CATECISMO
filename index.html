@@ -6,7 +6,7 @@
     <meta name="description" content="Sistema de gestão para catequese: registre aulas, evangelhos, orações e acompanhe catequizandos.">
     <title>Guia da Catequese - Sistema de Gestão</title>
     
-    <!-- Preconnect otimizado (sem espaços) -->
+    <!-- Preconnect otimizado -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -17,15 +17,15 @@
     <!-- Skip link para acessibilidade -->
     <a href="#main-content" class="skip-link">Pular para conteúdo principal</a>
     
-    <!-- Elemento decorativo de fundo (gerado via CSS) -->
+    <!-- Background decorativo -->
     <div class="bg-texture" aria-hidden="true"></div>
     
-    <!-- Botão de toggle para mobile (inicialmente oculto, exibido via CSS media query) -->
+    <!-- Botão toggle mobile -->
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
         <span class="hamburger" aria-hidden="true"></span>
     </button>
     
-    <!-- Sidebar Fixa -->
+    <!-- Sidebar -->
     <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
         <div class="sidebar-header">
             <div class="logo" aria-hidden="true">✝</div>
@@ -34,37 +34,30 @@
         </div>
         
         <nav class="sidebar-nav">
-            <!-- Botões com data-section para navegação via JS -->
             <button class="nav-item active" data-section="dashboard" aria-current="page">
                 <span class="nav-icon" aria-hidden="true">📖</span>
                 <span class="nav-text">Início</span>
             </button>
-            
             <button class="nav-item" data-section="inicio-fe">
                 <span class="nav-icon" aria-hidden="true">🕊️</span>
                 <span class="nav-text">Início da Fé</span>
             </button>
-            
             <button class="nav-item" data-section="evangelho">
                 <span class="nav-icon" aria-hidden="true">📜</span>
                 <span class="nav-text">Evangelho</span>
             </button>
-            
             <button class="nav-item" data-section="oracao">
                 <span class="nav-icon" aria-hidden="true">🙏</span>
                 <span class="nav-text">Oração</span>
             </button>
-            
             <button class="nav-item" data-section="sacramentos">
                 <span class="nav-icon" aria-hidden="true">✝️</span>
                 <span class="nav-text">Sacramentos</span>
             </button>
-            
             <button class="nav-item" data-section="missao">
                 <span class="nav-icon" aria-hidden="true">🌟</span>
                 <span class="nav-text">Missão</span>
             </button>
-            
             <button class="nav-item" data-section="catequizandos">
                 <span class="nav-icon" aria-hidden="true">👥</span>
                 <span class="nav-text">Catequizandos</span>
@@ -80,7 +73,7 @@
     <!-- Conteúdo Principal -->
     <main class="main-content" id="main-content" tabindex="-1">
         
-        <!-- SEÇÃO: DASHBOARD -->
+        <!-- DASHBOARD -->
         <section id="dashboard" class="content-section active" aria-labelledby="dashboard-title">
             <div class="section-header">
                 <h2 id="dashboard-title">Bem-vindo ao Guia da Catequese</h2>
@@ -89,37 +82,31 @@
             </div>
             
             <div class="dashboard-grid">
-                <!-- Cards agora são botões para acessibilidade e semântica -->
                 <button class="dashboard-card" data-navigate="inicio-fe">
                     <div class="card-icon" aria-hidden="true">🕊️</div>
                     <h3>Início da Fé</h3>
                     <p>Registre aulas e conteúdos</p>
                 </button>
-                
                 <button class="dashboard-card" data-navigate="evangelho">
                     <div class="card-icon" aria-hidden="true">📜</div>
                     <h3>Evangelho</h3>
                     <p>Palavra e reflexões</p>
                 </button>
-                
                 <button class="dashboard-card" data-navigate="oracao">
-                    <div class="nav-icon" aria-hidden="true">🙏</div>
+                    <div class="card-icon" aria-hidden="true">🙏</div>
                     <h3>Oração</h3>
                     <p>Pedidos e agradecimentos</p>
                 </button>
-                
                 <button class="dashboard-card" data-navigate="sacramentos">
                     <div class="card-icon" aria-hidden="true">✝️</div>
                     <h3>Sacramentos</h3>
                     <p>Acompanhamento sacramental</p>
                 </button>
-                
                 <button class="dashboard-card" data-navigate="missao">
                     <div class="card-icon" aria-hidden="true">🌟</div>
                     <h3>Missão</h3>
                     <p>Missões semanais</p>
                 </button>
-                
                 <button class="dashboard-card" data-navigate="catequizandos">
                     <div class="card-icon" aria-hidden="true">👥</div>
                     <h3>Catequizandos</h3>
@@ -128,7 +115,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO: INÍCIO DA FÉ -->
+        <!-- INÍCIO DA FÉ -->
         <section id="inicio-fe" class="content-section" aria-labelledby="inicio-fe-title" hidden>
             <div class="section-header">
                 <h2 id="inicio-fe-title">Início da Fé</h2>
@@ -141,34 +128,27 @@
                     <h3><span class="ornament" aria-hidden="true"></span> Registrar Aula <span class="ornament" aria-hidden="true"></span></h3>
                 </div>
                 
-                <!-- ID corrigido: sem acento -->
                 <form id="formInicioFe" novalidate>
                     <input type="hidden" id="feId">
-                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="feData">Data da Aula</label>
                             <input type="date" id="feData" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="feTema">Tema</label>
                             <input type="text" id="feTema" placeholder="Ex: Acolhida / Início das aulas" required>
                         </div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="feObjetivo">Objetivo da Aula</label>
                         <input type="text" id="feObjetivo" placeholder="Ex: Apresentar quem é Jesus">
                     </div>
-                    
                     <div class="form-group">
                         <label for="feTexto">Texto da Aula</label>
                         <textarea id="feTexto" rows="4" placeholder="Escreva tudo que foi debatido..."></textarea>
                     </div>
-                    
                     <div class="form-actions">
-                        <!-- Classe utilitária para esconder, sem estilo inline -->
                         <button type="button" class="btn btn-cancel hidden" id="btnCancelFe">Cancelar</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitFe">
                             <span class="btn-text">Salvar Registro</span>
@@ -180,13 +160,11 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaInicioFe" class="records-list" aria-live="polite">
-                    <div class="loading">Carregando registros...</div>
-                </div>
+                <div id="listaInicioFe" class="records-list" aria-live="polite"></div>
             </div>
         </section>
 
-        <!-- SEÇÃO: EVANGELHO -->
+        <!-- EVANGELHO -->
         <section id="evangelho" class="content-section" aria-labelledby="evangelho-title" hidden>
             <div class="section-header">
                 <h2 id="evangelho-title">Evangelho</h2>
@@ -201,29 +179,24 @@
                 
                 <form id="formEvangelho" novalidate>
                     <input type="hidden" id="evId">
-                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="evData">Data</label>
                             <input type="date" id="evData" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="evReferencia">Referência</label>
                             <input type="text" id="evReferencia" placeholder="Ex: Jo 4,5-42" required>
                         </div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="evFrase">Frase-Chave</label>
                         <input type="text" id="evFrase" placeholder="Ex: Quem tem sede, venha a mim">
                     </div>
-                    
                     <div class="form-group">
                         <label for="evTexto">Texto</label>
                         <textarea id="evTexto" rows="4" placeholder="Cole o evangelho, escreva a reflexão..."></textarea>
                     </div>
-                    
                     <div class="form-actions">
                         <button type="button" class="btn btn-cancel hidden" id="btnCancelEv">Cancelar</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitEv">
@@ -236,13 +209,11 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaEvangelho" class="records-list" aria-live="polite">
-                    <div class="loading">Carregando registros...</div>
-                </div>
+                <div id="listaEvangelho" class="records-list" aria-live="polite"></div>
             </div>
         </section>
 
-        <!-- SEÇÃO: ORAÇÃO (ID corrigido: sem acento) -->
+        <!-- ORAÇÃO (ID sem acento) -->
         <section id="oracao" class="content-section" aria-labelledby="oracao-title" hidden>
             <div class="section-header">
                 <h2 id="oracao-title">Oração</h2>
@@ -255,16 +226,13 @@
                     <h3><span class="ornament" aria-hidden="true"></span> Pedidos e Agradecimentos <span class="ornament" aria-hidden="true"></span></h3>
                 </div>
                 
-                <!-- ID corrigido: formOracao (sem acento) -->
                 <form id="formOracao" novalidate>
                     <input type="hidden" id="orId">
-                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="orData">Data</label>
                             <input type="date" id="orData" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="orTipo">Tipo</label>
                             <select id="orTipo" required>
@@ -274,17 +242,14 @@
                             </select>
                         </div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="orCausa">Causa / Intenção</label>
                         <input type="text" id="orCausa" placeholder="Ex: saúde, família, gratidão...">
                     </div>
-                    
                     <div class="form-group">
                         <label for="orDetalhes">Detalhes</label>
                         <textarea id="orDetalhes" rows="3" placeholder="Escreva a intenção..."></textarea>
                     </div>
-                    
                     <div class="form-actions">
                         <button type="button" class="btn btn-cancel hidden" id="btnCancelOr">Cancelar</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitOr">
@@ -297,13 +262,11 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaOracao" class="records-list" aria-live="polite">
-                    <div class="loading">Carregando registros...</div>
-                </div>
+                <div id="listaOracao" class="records-list" aria-live="polite"></div>
             </div>
         </section>
 
-        <!-- SEÇÃO: SACRAMENTOS -->
+        <!-- SACRAMENTOS -->
         <section id="sacramentos" class="content-section" aria-labelledby="sacramentos-title" hidden>
             <div class="section-header">
                 <h2 id="sacramentos-title">Sacramentos</h2>
@@ -318,29 +281,24 @@
                 
                 <form id="formSacramentos" novalidate>
                     <input type="hidden" id="saId">
-                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="saData">Data</label>
                             <input type="date" id="saData" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="saSacramento">Sacramento</label>
                             <input type="text" id="saSacramento" placeholder="Ex: Eucaristia / Confissão" required>
                         </div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="saCompromisso">Compromisso da Semana</label>
                         <input type="text" id="saCompromisso" placeholder="Ex: Rezar antes das refeições">
                     </div>
-                    
                     <div class="form-group">
                         <label for="saReflexao">Reflexão</label>
                         <textarea id="saReflexao" rows="3" placeholder="O que foi aprendido?"></textarea>
                     </div>
-                    
                     <div class="form-actions">
                         <button type="button" class="btn btn-cancel hidden" id="btnCancelSa">Cancelar</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitSa">
@@ -353,13 +311,11 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Registros <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaSacramentos" class="records-list" aria-live="polite">
-                    <div class="loading">Carregando registros...</div>
-                </div>
+                <div id="listaSacramentos" class="records-list" aria-live="polite"></div>
             </div>
         </section>
 
-        <!-- SEÇÃO: MISSÃO -->
+        <!-- MISSÃO -->
         <section id="missao" class="content-section" aria-labelledby="missao-title" hidden>
             <div class="section-header">
                 <h2 id="missao-title">Missão</h2>
@@ -374,22 +330,18 @@
                 
                 <form id="formMissao" novalidate>
                     <input type="hidden" id="miId">
-                    
                     <div class="form-group">
                         <label for="miData">Data</label>
                         <input type="date" id="miData" required>
                     </div>
-                    
                     <div class="form-group">
                         <label for="miPergunta">Pergunta</label>
                         <input type="text" id="miPergunta" placeholder="Ex: O que Jesus quer de mim?" required>
                     </div>
-                    
                     <div class="form-group">
                         <label for="miObjetivo">Objetivo da Missão</label>
                         <input type="text" id="miObjetivo" placeholder="Ex: Atitude de amor ao próximo">
                     </div>
-                    
                     <div class="form-actions">
                         <button type="button" class="btn btn-cancel hidden" id="btnCancelMi">Cancelar</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitMi">
@@ -402,13 +354,11 @@
             
             <div class="records-section">
                 <h3><span class="ornament" aria-hidden="true"></span> Perguntas <span class="ornament" aria-hidden="true"></span></h3>
-                <div id="listaMissao" class="records-list" aria-live="polite">
-                    <div class="loading">Carregando registros...</div>
-                </div>
+                <div id="listaMissao" class="records-list" aria-live="polite"></div>
             </div>
         </section>
 
-        <!-- SEÇÃO: CATEQUIZANDOS -->
+        <!-- CATEQUIZANDOS -->
         <section id="catequizandos" class="content-section" aria-labelledby="catequizandos-title" hidden>
             <div class="section-header">
                 <h2 id="catequizandos-title">Catequizandos</h2>
@@ -423,19 +373,16 @@
                 
                 <form id="formCatequizandos" novalidate>
                     <input type="hidden" id="catId">
-                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="catNome">Nome Completo</label>
                             <input type="text" id="catNome" placeholder="Digite o nome completo" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="catIdade">Idade</label>
                             <input type="number" id="catIdade" placeholder="Ex: 14" min="5" max="100" required>
                         </div>
                     </div>
-                    
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="catTurma">Turma</label>
@@ -448,23 +395,19 @@
                                 <option value="Outra">Outra</option>
                             </select>
                         </div>
-                        
                         <div class="form-group">
                             <label for="catLocal">Local</label>
                             <input type="text" id="catLocal" placeholder="Ex: Paróquia São José" required>
                         </div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="catContato">Contato (Responsável)</label>
                         <input type="text" id="catContato" placeholder="Telefone ou email">
                     </div>
-                    
                     <div class="form-group">
                         <label for="catObservacoes">Observações</label>
                         <textarea id="catObservacoes" rows="2" placeholder="Informações adicionais..."></textarea>
                     </div>
-                    
                     <div class="form-actions">
                         <button type="button" class="btn btn-cancel hidden" id="btnCancelCat">Cancelar</button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitCat">
@@ -489,15 +432,13 @@
                         <option value="Iniciação">Iniciação</option>
                     </select>
                 </div>
-                <div id="listaCatequizandos" class="records-list" aria-live="polite">
-                    <div class="loading">Carregando catequizandos...</div>
-                </div>
+                <div id="listaCatequizandos" class="records-list" aria-live="polite"></div>
             </div>
         </section>
 
     </main>
 
-    <!-- Modal de Comentários (com ARIA completo) -->
+    <!-- Modal de Comentários -->
     <div id="modalComentarios" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalComentariosTitle" hidden>
         <div class="modal-content">
             <div class="modal-header">
@@ -506,27 +447,20 @@
             </div>
             <div class="modal-body">
                 <div id="modalTitulo" class="modal-titulo"></div>
-                
-                <div id="listaComentarios" class="comentarios-list" aria-live="polite">
-                    <!-- Comentários serão carregados aqui -->
-                </div>
-                
+                <div id="listaComentarios" class="comentarios-list" aria-live="polite"></div>
                 <div class="form-comentario">
                     <h4>Adicionar Comentário</h4>
                     <form id="formComentario" novalidate>
                         <input type="hidden" id="comParentCollection">
                         <input type="hidden" id="comParentId">
-                        
                         <div class="form-group">
                             <label for="comNome">Nome do Aluno</label>
                             <input type="text" id="comNome" placeholder="Digite seu nome" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="comTexto">Comentário</label>
                             <textarea id="comTexto" rows="3" placeholder="O que você achou?" required></textarea>
                         </div>
-                        
                         <button type="submit" class="btn btn-primary btn-block" id="btnSubmitComentario">
                             <span class="btn-text">Adicionar Comentário</span>
                             <span class="btn-loading hidden">Enviando...</span>
@@ -537,14 +471,14 @@
         </div>
     </div>
 
-    <!-- Toast container para mensagens -->
+    <!-- Toast Container -->
     <div id="toastContainer" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
 
-    <!-- Firebase SDKs (versão compat para browser) -->
+    <!-- Firebase SDKs Compat -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
-    <!-- Script principal com defer para garantir carregamento após DOM -->
+    <!-- Script principal -->
     <script src="script.js" defer></script>
 </body>
 </html>
